@@ -1,6 +1,7 @@
 /*
 	De_Code_IT_001 - Temp Table Schemas 
-	Version 1.0.0
+	Version 1.0.1
+	-- Updated TempRachelle to TempRashelle 
 */
 
 create table TempBrenda
@@ -33,7 +34,7 @@ create table TempIssac
 	[u_zipCode] VARCHAR(10) NULL
 )
 
-create table TempRachelle
+create table TempRashelle
 (
 	[u_id] INT NOT NULL PRIMARY KEY,
 	[u_name] VARCHAR(30) NULL,
