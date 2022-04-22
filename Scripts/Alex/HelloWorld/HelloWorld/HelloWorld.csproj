@@ -5,4 +5,18 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="WorkerLibs\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WorkerClasses\WorkerClasses.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="WorkerClasses">
+      <HintPath>..\WorkerClasses\bin\Debug\net5.0\WorkerClasses.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
