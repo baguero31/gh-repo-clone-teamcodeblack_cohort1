@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "HelloWorld": {
+      "commandName": "Project",
+      "workingDirectory": "C:\\Repos\\teamcodeblack_capstoneit\\Scripts\\Alex"
+    }
+  }
+}
