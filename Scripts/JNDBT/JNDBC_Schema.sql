@@ -66,3 +66,23 @@ BEGIN
 	PRINT 'Credits Table already exists'
 END
 GO
+
+--new insert intodebit stored procedure
+--havent tried it out yet because i want to move it to bitbucket then give it a shot on a faster pc than this laptop
+--no offence, its slow, very, slow
+--lmk what else needs change
+CREATE PROCEDURE 
+    insertIntoDebit
+        @DebitID_ DATETIME
+	    ,@TransactionAmount_ MONEY
+    	,@VendorID_ VARCHAR 38
+    	,@MemoLine_ VARCHAR 200
+    	,@DebitCleared_ BIT
+
+    AS
+	BEGIN
+        INSERT INTO Debits
+        (DebitID, TransactionDate, VendorID, MemoLine, DebitCleared)
+        VALUES (DebitID_, TransactionAmount_, VendorID_, MemoLine_, DebitCleared_)
+    END
+GO
