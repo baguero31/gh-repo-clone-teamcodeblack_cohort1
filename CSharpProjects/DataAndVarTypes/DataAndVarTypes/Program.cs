@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DataAndVarTypes
 {
@@ -23,10 +25,63 @@ namespace DataAndVarTypes
             */
 
             //Value Types
-
+            bool isBool = true;
+            byte AByte = 255;
+            char BChar = 'C';
+            decimal cDecimal = 100.00M;
+            double cDouble = 114.5D;
+            float cFloat = 113.5F;
+            int cInt = 564646;
+            long cLong = 564654654654654654;
+            short cShort = 5165;
 
             //Reference Types
+            string cString = "05165";
+
+            short.TryParse(cString, out short newShort);
+
+            string[] stringArr = new string[]
+            {
+                "Alex", "Brenda", "Zak", "Charity",
+                "Chelle", "LaResha", "Isaac"
+            };
+
+            Console.WriteLine(stringArr[5]);
+
+            List<string> stringList = new List<string>()
+            {
+                "Alex", "Brenda", "Zak", "Charity",
+                "Chelle", "LaResha", "Isaac"
+            };
+
+            List<SomeClass> somes = new List<SomeClass>()
+            {
+                new SomeClass()
+                {
+                  SomeString = "This",
+                  SomeInt = 0
+                },
+                new SomeClass()
+                {
+                    SomeString = "That",
+                    SomeInt = 1
+                }
+            };
+
+
+            var someInfo = "hello";
+            string floatInfo = "999";
+
+            var newInt = Convert.ToInt16(floatInfo);
+
+
 
         }
+    }
+
+    public class SomeClass
+    {
+        public string SomeString { get; set; }
+        public int SomeInt { get; set; }
     }
 }
