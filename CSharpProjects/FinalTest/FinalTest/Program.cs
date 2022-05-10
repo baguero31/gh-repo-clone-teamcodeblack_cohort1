@@ -12,13 +12,13 @@ namespace FinalTest
         static void Main(string[] args)
         {
             /*
-             * 1.  Create a NEW instance of the NameModel Class.
+             * P1.  Create a NEW instance of the NameModel Class.
              *     Call the instance finalTest.  Provide the answer below.
              */
 
 
             /*
-             * 2. Using the assignment operator, set the 
+             * P2. Using the assignment operator, set the 
              *    following values
              *    
              *    ID should have any number of the proper type
@@ -41,7 +41,7 @@ namespace FinalTest
             DateTime CreatedDate;
 
             /* 
-             * 3. Set each finalTest property WITH THE VALUE of the types you 
+             * P3. Set each finalTest property WITH THE VALUE of the types you 
              *    created in step 2.  Make corrections to place the 
              *    data into the property if needed.
              *    
@@ -52,7 +52,7 @@ namespace FinalTest
 
 
             /*
-             * 4. Write a conditional filter that looks for IDs that are greater than 
+             * P4. Write a conditional filter that looks for IDs that are greater than 
              *    and equal to 0.  If the condition evaluates to TRUE, then set the ID
              *    to 15.
              *    
@@ -60,7 +60,7 @@ namespace FinalTest
              */
 
             /*
-             * 5. Create a method titled FinalTestDone that accepts a string parameter
+             * P5. Create a method titled FinalTestDone that accepts a string parameter
              *    and returns a boolean type.  Inside of the method, write a conditional
              *    that compares the parameter passed in to a value specified by yourself.
              *    
