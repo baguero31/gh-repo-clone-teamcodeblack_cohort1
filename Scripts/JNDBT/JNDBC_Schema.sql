@@ -67,22 +67,21 @@ BEGIN
 END
 GO
 
---new insert intodebit stored procedure
---havent tried it out yet because i want to move it to bitbucket then give it a shot on a faster pc than this laptop
---no offence, its slow, very, slow
---lmk what else needs change
+--new update for pull request, thanks to alex for the help, i was totally lost
 CREATE PROCEDURE 
-    insertIntoDebit
-        @DebitID_ DATETIME
-	    ,@TransactionAmount_ MONEY
-    	,@VendorID_ VARCHAR 38
-    	,@MemoLine_ VARCHAR 200
-    	,@DebitCleared_ BIT
-
-    AS
+    [dbo].[sp_InsertIntoDebit]
+        @DebitID DATETIME
+	    ,@TransactionAmount MONEY
+    	,@VendorID VARCHAR (38)
+    	,@MemoLine VARCHAR (200)
+    	,@DebitCleared BIT
+AS
 	BEGIN
-        INSERT INTO Debits
-        (DebitID, TransactionDate, VendorID, MemoLine, DebitCleared)
-        VALUES (DebitID_, TransactionAmount_, VendorID_, MemoLine_, DebitCleared_)
+        INSERT INTO [dbo].[Debits]
+            (DebitID, TransactionDate, TransactionAmount, VendorID, MemoLine, DebitCleared)
+        VALUES 
+		    (@DebitID, GETDATE(), @TransactionAmount, @VendorID, @MemoLine, @DebitCleared)
     END
 GO
+
+
