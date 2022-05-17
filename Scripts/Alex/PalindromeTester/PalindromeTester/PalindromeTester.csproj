@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <Description>A Palindrome Tester</Description>
+    <Copyright>DE-CODE-IT</Copyright>
+  </PropertyGroup>
+
+</Project>
