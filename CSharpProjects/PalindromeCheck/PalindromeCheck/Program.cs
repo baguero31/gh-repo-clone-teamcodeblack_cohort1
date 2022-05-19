@@ -8,6 +8,7 @@ namespace PalindromeCheck
         static void Main(string[] args)
         {
             string quitString = "Y";
+            string inputWord;
 
             Console.WriteLine("Hello! Welcome to the Palindrome Checker!");
             Console.WriteLine();
@@ -16,7 +17,7 @@ namespace PalindromeCheck
             {
                 Console.WriteLine("Type in a word to check if it is a Palindrome.");
                 Console.WriteLine("Press enter after you are done.");
-                var inputWord = Console.ReadLine();
+                inputWord = Console.ReadLine();
 
 
                 if (string.IsNullOrEmpty(inputWord))
