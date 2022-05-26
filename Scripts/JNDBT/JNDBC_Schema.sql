@@ -1,5 +1,3 @@
-use CheckRegister
-GO
 
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Vendors]') AND type in (N'U'))
 BEGIN
@@ -65,4 +63,43 @@ ELSE
 BEGIN
 	PRINT 'Credits Table already exists'
 END
+GO
+
+IF OBJECT_ID(N'[dbo].[sp_InsertIntoDebit]', N'P') IS NOT NULL
+	DROP PROCEDURE [dbo].[sp_InsertIntoDebit]
+	PRINT 'DROPPED [dbo].[sp_InsertIntoDebit]'
+GO
+
+--new update for pull request, thanks to alex for the help, i was totally lost
+CREATE PROCEDURE 
+    [dbo].[sp_InsertIntoDebit]
+        @DebitID UNIQUEIDENTIFIER
+	    ,@TransactionAmount MONEY
+    	,@VendorID VARCHAR(38)
+    	,@MemoLine VARCHAR(200)
+    	,@DebitCleared BIT
+AS
+	BEGIN
+        INSERT INTO [dbo].[Debits]
+            (DebitID, TransactionDate, TransactionAmount, VendorID, MemoLine, DebitCleared)
+        VALUES 
+		    (@DebitID, GETDATE(), @TransactionAmount, @VendorID, @MemoLine, @DebitCleared)
+    END
+GO
+
+
+IF OBJECT_ID(N'[dbo].[sp_InsertCredits]', N'P') IS NOT NULL
+	DROP PROCEDURE [dbo].[sp_InsertCredits]
+	PRINT 'DROPPED [dbo].[sp_InsertCredits]'
+GO
+
+CREATE PROCEDURE [dbo].[sp_InsertCredits]
+	 @TransactionAmount MONEY
+	,@VendorID VARCHAR(38)
+	,@MemoLine VARCHAR(200)
+	,@CreditCleared BIT
+AS
+	INSERT INTO [dbo].[Credits] 
+	(TransactionAmount, TransactionDate, VendorID, MemoLine, CreditCleared)
+	VALUES (@TransactionAmount, GETDATE(), @VendorID, @MemoLine, @CreditCleared)
 GO
