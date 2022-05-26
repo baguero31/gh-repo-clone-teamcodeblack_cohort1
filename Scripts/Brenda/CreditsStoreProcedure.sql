@@ -1,17 +1,21 @@
 
+
 SELECT * 
-FROM dbo.genderalLedger;
+
+FROM dbo.GeneralLedger;
+
 GO
 
- create procedure 
-		,@CreditID_ DATETIME
-+	    ,@TransactionAmount_ MONEY
-+    	,@VendorID_ VARCHAR 38
-AS
-+	BEGIN
-+        INSERT INTO Credit
-+        (CreditID, TransactionDate, VendorID,)
-+        VALUES (CreditID_, TransactionAmount_, VendorID_,)
-+    END
- GO
+ CREATE procedure 
 
+		,@CreditID DATETIME
+	    ,@TransactionAmount MONEY
+		,@VendorID VARCHAR(38)
+
+AS
+	BEGIN
+        Update INTO Credit
+        (CreditID, TransactionAmount, TransactionDate, VendorID,MemoLine)
+        VALUES (CreditID_, TransactionAmount_,TransactionDate_, VendorID_,MemoLine_)
+
+	END
