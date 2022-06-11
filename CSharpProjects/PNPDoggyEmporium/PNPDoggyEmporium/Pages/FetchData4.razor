@@ -1,0 +1,72 @@
+﻿@page "/fetchdata4"
+
+@using System.Collections.Generic;
+@using System.Linq;
+@using PNPDoggyEmporium.Dao
+@using PNPDoggyEmporium.Models
+@inject PNPDoggyDao DAO
+
+<h1>Get Customer Info</h1>
+
+<p>Lookup a customer by Name</p>
+
+<EditForm Model="@InputModel" OnSubmit="@ValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <label>First Name: </label>
+    <InputText id="firstName" @bind-Value="InputModel.FirstName" />
+    <label>Last Name: </label>
+    <InputText id="lastName" @bind-Value="InputModel.LastName" />
+    <button type="submit">Submit</button>
+</EditForm>
+<br /><br />
+
+@if (results == null)
+{
+}
+else if(!string.IsNullOrEmpty(InputModel.FirstName) && !string.IsNullOrEmpty(InputModel.LastName) && results.Count() == 0)
+{
+    <p>No Rows Found.  Try again.</p>    
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Last Name</th>
+                <th>First Name</th>
+                <th>Average Customer Points</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var pCustomer in results.OrderByDescending(y => y.LastName))
+            {
+                <tr>
+                    <td>@pCustomer.LastName</td>
+                    <td>@pCustomer.FirstName</td>
+                    <td>@pCustomer.TotalPoints</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private string lName = string.Empty;
+    private string fName = string.Empty;
+    private Customers InputModel = new Customers();
+    private List<TPPCustomers> results;
+
+    public async Task ValidSubmit()
+    {
+        if (!string.IsNullOrEmpty(InputModel.FirstName) && !string.IsNullOrEmpty(InputModel.LastName))
+        {
+            var custs = await Task.Run(() => DAO.GetCustomerByName(InputModel.FirstName, InputModel.LastName));
+            results = custs.ToList();
+        }
+    }
+
+
+
+}
+

@@ -1,0 +1,51 @@
+﻿@page "/fetchdata3"
+
+@using System.Collections.Generic;
+@using System.Linq;
+@using PNPDoggyEmporium.Dao
+@using PNPDoggyEmporium.Models
+@inject PNPDoggyDao DAO
+
+<h1>Loyalty Points (By Customer Average)</h1>
+
+<p>Average Loyalty Points (by Customer)!</p>
+
+@if (custs == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Last Name</th>
+                <th>First Name</th>
+                <th>Average Customer Points</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var pCustomer in custs.OrderByDescending(y => y.LastName))
+            {
+                <tr>
+                    <td>@pCustomer.LastName</td>
+                    <td>@pCustomer.FirstName</td>
+                    <td>@pCustomer.AvgPoints</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<APPCustomers> custList = new List<APPCustomers>();
+    private List<APPCustomers> custs;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var newCusts = await DAO.GetLoyaltyAverages();
+        custs = newCusts.ToList();
+
+    }
+}
+

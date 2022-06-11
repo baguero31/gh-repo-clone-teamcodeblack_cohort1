@@ -1,0 +1,50 @@
+﻿@page "/fetchdata"
+
+@using System.Collections.Generic;
+@using System.Linq;
+@using PNPDoggyEmporium.Dao
+@using PNPDoggyEmporium.Models
+@inject PNPDoggyDao DAO
+
+<h1>Loyalty Points (Alphabetical)</h1>
+
+<p>Loyalty Award points List sorted by Name, then by Points!</p>
+
+@if (custs == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+
+        <thead>
+            <tr>
+                <th>Last Name</th>
+                <th>First Name</th>
+                <th>Transaction Points</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var customer in custs.OrderByDescending(x => x.LastName))
+            {
+                <tr>
+                    <td>@customer.LastName</td>
+                    <td>@customer.FirstName</td>
+                    <td>@customer.TotalPoints</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<TPPCustomers> custList = new List<TPPCustomers>();
+    private List<TPPCustomers> custs;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var newCusts = await DAO.GetLoyaltyInfoSorted();
+        custs = newCusts.ToList();
+    }
+}

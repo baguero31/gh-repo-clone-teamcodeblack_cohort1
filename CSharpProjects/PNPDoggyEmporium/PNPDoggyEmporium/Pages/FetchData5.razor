@@ -1,0 +1,50 @@
+﻿@page "/fetchdata5"
+
+@using System.Collections.Generic;
+@using System.Linq;
+@using PNPDoggyEmporium.Dao
+@using PNPDoggyEmporium.Models
+@inject PNPDoggyDao DAO
+
+<h1>Loyalty Duplicate Members (More than one point entry)</h1>
+
+<p>Loyalty Award Duplicate Members</p>
+
+@if (custs == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Last Name</th>
+                <th>First Name</th>
+                <th>Number of table rows</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var sCustomer in custs)            
+            {
+                <tr>
+                    <td>@sCustomer.LastName</td>
+                    <td>@sCustomer.FirstName</td>
+                    <td>@sCustomer.CountNum</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<DupCustomers> custList = new List<DupCustomers>();
+    private List<DupCustomers> custs;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var newCusts = await DAO.GetDuplicateCustomers();
+        custs = newCusts.ToList();
+
+    }
+}
