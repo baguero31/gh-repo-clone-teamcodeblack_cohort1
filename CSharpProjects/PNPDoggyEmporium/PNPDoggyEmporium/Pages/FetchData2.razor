@@ -1,0 +1,98 @@
+﻿@page "/fetchdata2"
+
+@using System.Collections.Generic;
+@using System.Linq;
+@using PNPDoggyEmporium.Dao
+@using PNPDoggyEmporium.Models
+@inject PNPDoggyDao DAO
+
+<h1>Loyalty Points (By Level Type)</h1>
+
+<p>Loyalty Award points List sorted by Platinum, Gold, and Silver Levels!</p>
+
+@if (custs == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Reward Level</th>
+                <th>Last Name</th>
+                <th>First Name</th>
+                <th>Transaction Points</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var pCustomer in custs.Where(x => x.LoyaltyType.ToLower().Contains("platinum")))
+            {
+                <tr>
+                    <td>@pCustomer.LoyaltyType</td>
+                    <td>@pCustomer.LastName</td>
+                    <td>@pCustomer.FirstName</td>
+                    <td>@pCustomer.TotalPoints</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <br /><br />
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Reward Level</th>
+                <th>Last Name</th>
+                <th>First Name</th>
+                <th>Transaction Points</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var gCustomer in custs.Where(x => x.LoyaltyType.ToLower().Contains("gold")))            
+            {
+                <tr>
+                    <td>@gCustomer.LoyaltyType</td>
+                    <td>@gCustomer.LastName</td>
+                    <td>@gCustomer.FirstName</td>
+                    <td>@gCustomer.TotalPoints</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <br /><br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Reward Level</th>
+                <th>Last Name</th>
+                <th>First Name</th>
+                <th>Transaction Points</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var sCustomer in custs.Where(x => x.LoyaltyType.ToLower().Contains("silver")))            
+            {
+                <tr>
+                    <td>@sCustomer.LoyaltyType</td>
+                    <td>@sCustomer.LastName</td>
+                    <td>@sCustomer.FirstName</td>
+                    <td>@sCustomer.TotalPoints</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<TPPCustomers> custList = new List<TPPCustomers>();
+    private List<TPPCustomers> custs;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var newCusts = await DAO.GetLoyaltyInfoSorted();
+        custs = newCusts.ToList();
+
+    }
+}
